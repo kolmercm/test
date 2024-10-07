@@ -19,6 +19,16 @@
             width: 100%;
             margin-top: 20px;
         }
+        #view-notes {
+            margin-left: 10px;
+        }
+        #saved-notes {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
     </style>
 </head>
 <body>
@@ -27,7 +37,7 @@
     <button id="stop-recording" disabled>Stop Recording</button>
     <textarea id="notes" rows="10" cols="50" placeholder="Your notes will appear here..."></textarea>
     <button id="save-notes">Save Notes</button>
-
+    <!-- The "View Saved Notes" button will be inserted here by JavaScript -->
     <script src="script.js"></script>
 </body>
 </html>

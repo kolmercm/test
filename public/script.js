@@ -56,3 +56,38 @@ document.getElementById('save-notes').addEventListener('click', () => {
         alert('An error occurred while saving notes.');
     });
 });
+
+// Remove the duplicate code for creating and adding the view notes button
+const viewNotesButton = document.createElement('button');
+viewNotesButton.textContent = 'View Saved Notes';
+viewNotesButton.id = 'view-notes';
+document.body.insertBefore(viewNotesButton, document.getElementById('save-notes').nextSibling);
+
+// Add a new div to display the notes
+const savedNotesDiv = document.createElement('div');
+savedNotesDiv.id = 'saved-notes';
+document.body.appendChild(savedNotesDiv);
+
+// Function to fetch and display saved notes
+function viewSavedNotes() {
+    fetch('/notes')  // Remove 'http://localhost:3000' to use relative path
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                savedNotesDiv.innerHTML = '<h2>Saved Notes:</h2>';
+                data.notes.forEach((note, index) => {
+                    savedNotesDiv.innerHTML += `<p><strong>Note ${index + 1}:</strong> ${note}</p>`;
+                });
+            } else {
+                alert('Failed to retrieve notes.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while retrieving notes.');
+        });
+}
+
+// Add event listener to the view notes button
+viewNotesButton.addEventListener('click', viewSavedNotes);
+
